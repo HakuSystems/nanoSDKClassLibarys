@@ -1,9 +1,32 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
+        <Nullable>disable</Nullable>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>default</LangVersion>
     </PropertyGroup>
+
+    <ItemGroup>
+      <Reference Include="Newtonsoft.Json">
+        <HintPath>..\..\nanoSDKDevelopment\Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEditor">
+        <HintPath>..\..\..\UNITY PROJECTS\gayboys\Main\Main\2019.4.31f1\Editor\Data\Managed\UnityEngine\UnityEditor.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine">
+        <HintPath>..\..\..\UNITY PROJECTS\gayboys\Main\Main\2019.4.31f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.CoreModule">
+        <HintPath>..\..\..\UNITY PROJECTS\gayboys\Main\Main\2019.4.31f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
+      </Reference>
+      <Reference Include="UnityEngine.IMGUIModule">
+        <HintPath>..\..\..\UNITY PROJECTS\gayboys\Main\Main\2019.4.31f1\Editor\Data\Managed\UnityEngine\UnityEngine.IMGUIModule.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Styles" />
+    </ItemGroup>
 
 </Project>

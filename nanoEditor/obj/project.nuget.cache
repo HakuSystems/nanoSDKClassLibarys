@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "m1eBIiMjFC1/PpE4p9dWIpwbssOYedNg15Y+rVqIZhhsI7mSEK/k1pIkNLh2qnjj5x8GiXm3R1/RSB4S287eOQ==",
+  "dgSpecHash": "nk3SfN+tlgN93M8a8Jo1nGxfFIkDNTb0+GkorbRr6AVgxzbuWHtIH8x5GoysZj1WvhKATYN78fvYdrcnZk9p7A==",
   "success": true,
   "projectFilePath": "G:\\xxx\\nanoSDKClassLibarys\\nanoEditor\\nanoEditor.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Tiger\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Tiger\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
