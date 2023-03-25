@@ -2,7 +2,7 @@
 
 namespace nanoEditor.Logger;
 
-public class NaxoLog
+public class NanoLog
 {
     public static void Log(string className, string message)
     {
