@@ -28,6 +28,11 @@ public class ConfigManager
             SaveConfig();
         }
     }
+    public static string GetCurrentVersion()
+    {
+        string version = File.ReadAllText("Assets/nanoSDK/Version.txt");
+        return version;
+    }
 
     private void SaveConfig()
     {
