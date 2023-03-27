@@ -38,10 +38,6 @@ public class NanoDashboard : EditorWindow
         //top
         EditorGUILayout.BeginHorizontal();
         GUILayout.Button(ApiHelper.user.Username,GUIStyleTypes.toolbarbutton.ToString());
-        if (GUILayout.Button("Switch Version", GUIStyleTypes.toolbarbutton.ToString()))
-        {
-            //TODO: Switch Version
-        }
         // ReSharper disable once TooManyChainedReferences
         var isPlus = _configManager.Config.PremiumCheck.IsPremiumSinceLastCheck ? "Yes" : "No";
         EditorGUILayout.LabelField($"Plus: {isPlus}", EditorStyles.centeredGreyMiniLabel);
