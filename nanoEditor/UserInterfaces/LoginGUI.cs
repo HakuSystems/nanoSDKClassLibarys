@@ -7,7 +7,7 @@ namespace nanoEditor.UserInterfaces;
 
 public class LoginGUI
 {
-    public static void DrawLoginGUI(ref string usernameInput, ref string passwordInput)
+    public static bool DrawLoginGUI(ref string usernameInput, ref string passwordInput)
     {
         EditorGUILayout.LabelField("Login");
         usernameInput = EditorGUILayout.TextField("Username", usernameInput);
@@ -29,5 +29,6 @@ public class LoginGUI
             else
                 ApiHelper.Login(usernameInput, passwordInput);
         }
+        return false;
     }
 }

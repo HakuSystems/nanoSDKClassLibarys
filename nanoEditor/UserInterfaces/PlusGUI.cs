@@ -4,8 +4,8 @@ namespace nanoEditor.UserInterfaces;
 
 public class PlusGUI : EditorWindow
 {
-    public static void DrawPlusGUI()
+    public static bool DrawPlusGUI()
     {
-        
+        return false;
     }
 }

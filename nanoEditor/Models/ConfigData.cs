@@ -13,6 +13,5 @@ public class ConfigData
     public DiscordPresenceData DiscordPresence { get; set; } = new();
     public SceneSaverData SceneSaver { get; set; } = new();
     public BackupManagerData BackupManager { get; set; } = new();
-    public NanoPlayModeToolsData NanoPlayModeTools { get; set; } = new();
 
 }

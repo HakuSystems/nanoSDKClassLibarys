@@ -2,5 +2,5 @@
 
 public class DefaultPathData
 {
-    public string DefaultPath { get; set; }
+    public string DefaultSet { get; set; }
 }
