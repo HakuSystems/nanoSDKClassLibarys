@@ -16,7 +16,7 @@ public class MassImporter : EditorWindow
 
     private void OnEnable()
     {
-        minSize = new Vector2(300, 300);
+        minSize = new Vector2(400, 300);
         _paths.Clear();
     }
 
@@ -32,30 +32,34 @@ public class MassImporter : EditorWindow
 
     private void OnGUI()
     {
-        if (Event.current.type == EventType.DragUpdated)
-        {
-            var visualMode = DragAndDropVisualMode.Copy;
-            Event.current.Use();
-        }
-        if(Event.current.type == EventType.DragPerform)
-        {
-            foreach (var path in DragAndDrop.paths)
-            {
-                _paths.Add(path);
-                NanoLog.Log("MassImporter", $"Added {path} to list.");
-            }
-            Event.current.Use();
-        }
-
         EditorGUILayout.BeginVertical();
-        EditorGUILayout.LabelField("Waiting for files to be dragged in.", EditorStyles.centeredGreyMiniLabel);
-        if (GUILayout.Button("Search on Computer"))
+        HandleDragAndDropEvent();
+        DisplayWaitingMessage();
+        HandleSearchOnComputerButton();
+        DisplayPathsList();
+        HandleImportAndRemoveAllButtons();
+        EditorGUILayout.EndVertical();
+    }
+
+    private void HandleImportAndRemoveAllButtons()
+    {
+        EditorGUILayout.BeginHorizontal();
+        if (_paths.Count != 0 && GUILayout.Button("Import All"))
         {
-            var filePanelPath = EditorUtility.OpenFilePanel("Select Unitypackage", "", "unitypackage");
-            if(filePanelPath.EndsWith(".unitypackage"))
-                _paths.Add(filePanelPath);
-            NanoLog.Log("MassImporter", $"Added {filePanelPath} to list.");
+            foreach (var path in _paths)
+            {
+                AssetDatabase.ImportPackage(path, false);
+            }
+            _paths.Clear();
+            NanoLog.Log("MassImporter", "Imported all packages.");
         }
+        if(_paths.Count != 0 && GUILayout.Button("Remove All"))
+            _paths.Clear();
+        EditorGUILayout.EndHorizontal();
+    }
+
+    private void DisplayPathsList()
+    {
         _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition);
         foreach (var path in _paths)
         {
@@ -70,21 +74,40 @@ public class MassImporter : EditorWindow
             EditorGUILayout.EndHorizontal();
         }
         EditorGUILayout.EndScrollView();
-        
-        EditorGUILayout.BeginHorizontal();
-        if (_paths.Count != 0 && GUILayout.Button("Import All"))
+    }
+
+    private void HandleSearchOnComputerButton()
+    {
+        if (GUILayout.Button("Search on Computer"))
         {
-            foreach (var path in _paths)
-            {
-                AssetDatabase.ImportPackage(path, false);
-            }
-            _paths.Clear();
-            NanoLog.Log("MassImporter", "Imported all packages.");
+            var filePanelPath = EditorUtility.OpenFilePanel("Select Unitypackage", "", "unitypackage");
+            if(filePanelPath.EndsWith(".unitypackage"))
+                _paths.Add(filePanelPath);
+            NanoLog.Log("MassImporter", $"Added {filePanelPath} to list.");
         }
-        if(_paths.Count != 0 && GUILayout.Button("Remove All"))
-            _paths.Clear();
-        EditorGUILayout.EndHorizontal();
-        
-        EditorGUILayout.EndVertical();
+    }
+
+    private void DisplayWaitingMessage()
+    {
+        EditorGUILayout.LabelField("Waiting for files to be dragged in", EditorStyles.centeredGreyMiniLabel);
+        EditorGUILayout.LabelField("Drag and drop only works when the unitypackage is in your project.", new GUIStyle(GUIStyleTypes.Toolbar.ToString()));
+    }
+
+    private void HandleDragAndDropEvent()
+    {
+        if (Event.current.type == EventType.DragUpdated)
+        {
+            var visualMode = DragAndDropVisualMode.Copy;
+            Event.current.Use();
+        }
+        if(Event.current.type == EventType.DragPerform)
+        {
+            foreach (var path in DragAndDrop.paths)
+            {
+                _paths.Add(path);
+                NanoLog.Log("MassImporter", $"Added {path} to list.");
+            }
+            Event.current.Use();
+        }
     }
 }

@@ -20,7 +20,7 @@ public class ToolsGUI : EditorWindow
         
         foreach (var tool in tools)
         {
-            if (GUILayout.Button(tool.Key, GUILayout.Width(100)))
+            if (GUILayout.Button(tool.Key, GUILayout.Width(120)))
             {
                 switch (tool.Key)
                 {
