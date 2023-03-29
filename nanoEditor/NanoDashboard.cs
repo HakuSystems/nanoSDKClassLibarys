@@ -17,6 +17,7 @@ public class NanoDashboard : EditorWindow
     private bool _toolsOpen;
     private bool _plusFoldout;
     private bool _saveInProject;
+    private Vector2 _scrollPosition;
 
     public static void ShowDashboard()
     {
@@ -61,6 +62,7 @@ public class NanoDashboard : EditorWindow
 
         //Tools
         EditorGUILayout.BeginVertical();
+        _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition);
         
         EditorGUILayout.LabelField("Welcome to the nanoSDK Dashboard!", EditorStyles.centeredGreyMiniLabel);
         
@@ -79,6 +81,7 @@ public class NanoDashboard : EditorWindow
         
 
         EditorGUILayout.EndVertical();
+        EditorGUILayout.EndScrollView();
 
         //footer
         EditorGUILayout.BeginHorizontal();
@@ -156,6 +159,7 @@ public class NanoDashboard : EditorWindow
     private async void OnEnable()
     {
         titleContent = new GUIContent("nanoSDK Dashboard");
+        minSize = new Vector2(1200, 300);
 
         if (_configManager.Config.NanoVersion.CheckForUpdates)
             await Updater.CheckForUpdates();
