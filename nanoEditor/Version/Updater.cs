@@ -3,6 +3,7 @@ using System.Net;
 using nanoEditor.Configs;
 using nanoEditor.Logger;
 using nanoEditor.Models;
+using nanoEditor.UserInterfaces.Tools;
 using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
@@ -46,8 +47,8 @@ public class Updater : MonoBehaviour
                 $"Version V{LatestVersion.Version} is available. Do you want to update?", "Yes", "No");
             if (update)
             {
-               // BackupManager.CreateBackup(Config.BackupManager_SaveAsUnitypackage_Enabled,
-               //     Config.BackupManager_DeleteOldBackups_Enabled); TODO
+                BackupManager.CreateBackup(_configManager.Config.BackupManager.SaveAsUnitypackage,
+                    _configManager.Config.BackupManager.SaveAsUnitypackage);
                 await DownloadVersion();
             }
             return;
