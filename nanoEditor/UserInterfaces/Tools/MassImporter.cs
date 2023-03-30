@@ -110,4 +110,10 @@ public class MassImporter : EditorWindow
             Event.current.Use();
         }
     }
+
+    public static void AddToMassImporter(string resultPath)
+    {
+        var window = GetWindow<MassImporter>();
+        window._paths.Add(resultPath);
+    }
 }

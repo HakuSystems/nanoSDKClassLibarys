@@ -14,8 +14,7 @@ public class ToolsGUI : EditorWindow
             { "MassImporter", "https:///naxokit.com/discord" },
             { "PresetManager", "https:///naxokit.com/discord" },
             { "EasySearch", "https:///naxokit.com/discord" },
-            { "BackupManager", "https:///naxokit.com/discord" },
-            { "SortFiles", "https:///naxokit.com/discord" }
+            { "BackupManager", "https:///naxokit.com/discord" }
         };
         
         foreach (var tool in tools)
@@ -29,9 +28,6 @@ public class ToolsGUI : EditorWindow
                         break;
                     case "EasySearch":
                         GetWindow(typeof(Tools.EasySearch), false, "EasySearch");
-                        break;
-                    case "SortFiles":
-                        GetWindow(typeof(Tools.SortFiles), false, "SortFiles");
                         break;
                     case "AudioSourceVolumeControl":
                         GetWindow(typeof(Tools.AudioSourceVolumeControl), false, "AudioSourceVolumeControl");
