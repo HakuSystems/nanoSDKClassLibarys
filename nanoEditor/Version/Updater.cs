@@ -104,7 +104,7 @@ public class Updater : MonoBehaviour
 
             void OnWebClientOnDownloadFileCompleted(object sender, AsyncCompletedEventArgs args)
             {
-                var files = Directory.GetFiles(Application.dataPath + "/nanoSDK", "*.*", SearchOption.AllDirectories).Where(s => !s.EndsWith("Updater.cs"));
+                var files = Directory.GetFiles(Application.dataPath + "/nanoSDK", "*.*", SearchOption.AllDirectories).Where(s => !s.EndsWith("Updater.cs")); //doesnt make sense since its in this dll but whatever
 
 
                 EditorUtility.ClearProgressBar();

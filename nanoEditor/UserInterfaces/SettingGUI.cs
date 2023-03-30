@@ -55,14 +55,16 @@ public class SettingGUI : EditorWindow
     private static void AutoSaverSettings()
     {
         EditorGUILayout.BeginHorizontal();
-        //Todo: Add AutoSaver Settings
+        EditorGUILayout.LabelField("Auto Saver", EditorStyles.toolbarTextField);
+        _configManager.Config.SceneSaver.SaveEnabled = EditorGUILayout.ToggleLeft("Auto Save Scenes", _configManager.Config.SceneSaver.SaveEnabled);
+        EditorGUILayout.LabelField("Only saves in Edit Mode!", new GUIStyle(EditorStyles.textField) {normal = {textColor = Color.yellow}});
         EditorGUILayout.EndHorizontal();
     }
 
     private static void DiscordSettings()
     {
         EditorGUILayout.BeginHorizontal();
-        //Todo: Add Discord Settings
+        //todo discord
         EditorGUILayout.EndHorizontal();
     }
 
