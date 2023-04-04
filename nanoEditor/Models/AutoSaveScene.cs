@@ -20,6 +20,7 @@ public class AutoSaveScene
             // only save if at least 5 seconds have passed since the last save
             if (Time.realtimeSinceStartup - lastSaveTime >= 5)
             {
+                if(EditorSceneManager.sceneCount <= 0) return;
                 EditorSceneManager.SaveOpenScenes();
                 NanoLog.Log("SceneSaver", "Open Scenes saved");
                 lastSaveTime = Time.realtimeSinceStartup;
