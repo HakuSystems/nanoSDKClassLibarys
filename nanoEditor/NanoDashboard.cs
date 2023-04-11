@@ -1,10 +1,14 @@
 ﻿using nanoEditor.Auth;
 using nanoEditor.Configs;
+using nanoEditor.Discord;
+using nanoEditor.Logger;
+using nanoEditor.Models;
 using nanoEditor.Styles;
 using nanoEditor.UserInterfaces;
 using nanoEditor.Version;
 using UnityEditor;
 using UnityEngine;
+using static UnityEditor.EditorApplication;
 
 namespace nanoEditor;
 
@@ -16,6 +20,7 @@ public class NanoDashboard : EditorWindow
     private bool _settingsOpen;
     private bool _toolsOpen;
     private bool _plusFoldout;
+    private bool _importFoldout;
     private bool _saveInProject;
     private Vector2 _scrollPosition;
 
@@ -24,11 +29,21 @@ public class NanoDashboard : EditorWindow
         GetWindow(typeof(NanoDashboard), false, "nanoSDK Dashboard").Show();
     }
 
+    private void OnDisable()
+    {
+        //DiscordRpc.Shutdown(); todo
+    }
+
     private void OnGUI()
     {
-        //login related stuff
-        if (ApiHelper.user == null)
-            Close();
+        if(ApiHelper.user == null) 
+            ApiHelper.CheckUserSelf();
+        
+        if (AutoSaveScene.IsPlayMode())
+        {
+            EditorGUILayout.LabelField("You can't use the Dashboard in Play Mode", EditorStyles.centeredGreyMiniLabel);
+            return;
+        }
 
         EditorGUILayout.BeginVertical();
         if (!ApiHelper.user.IsVerified)
@@ -63,22 +78,22 @@ public class NanoDashboard : EditorWindow
         //Tools
         EditorGUILayout.BeginVertical();
         _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition);
-        
+
         EditorGUILayout.LabelField("Welcome to the nanoSDK Dashboard!", EditorStyles.centeredGreyMiniLabel);
-        
+
         _toolsOpen = FoldoutTexture.MakeTextFoldout("Tools", _toolsOpen);
         if (_toolsOpen)
             ToolsGUI.DrawToolsGUI();
-        
+
         _settingsOpen = FoldoutTexture.MakeTextFoldout("Settings", _settingsOpen);
         if (_settingsOpen)
             SettingGUI.DrawSettingsGUI();
+        _importFoldout = FoldoutTexture.MakeTextFoldout("Importables", _importFoldout);
+        if (_importFoldout)
+            ImportGUI.DrawImportGUI();
         _plusFoldout = FoldoutTexture.MakeTextFoldout("nanoSDK Plus", _plusFoldout);
-        if (_plusFoldout && _configManager.Config.PremiumCheck.IsPremiumSinceLastCheck)
-        {
-            PlusGUI.DrawPlusGUI();    
-        }
-        
+        if (_plusFoldout && _configManager.Config.PremiumCheck.IsPremiumSinceLastCheck) PlusGUI.DrawPlusGUI();
+
 
         EditorGUILayout.EndVertical();
         EditorGUILayout.EndScrollView();
@@ -106,10 +121,7 @@ public class NanoDashboard : EditorWindow
             if (!GUILayout.Button("Select Default Path..")) return;
             var path = EditorUtility.OpenFolderPanel("Select Default Path", "", "");
             if (string.IsNullOrEmpty(path)) return;
-            _configManager.UpdateConfig(config =>
-            {
-                config.DefaultPath.DefaultSet = path;
-            });
+            _configManager.UpdateConfig(config => { config.DefaultPath.DefaultSet = path; });
         }
 
         GUI.backgroundColor = Color.red;
@@ -121,10 +133,7 @@ public class NanoDashboard : EditorWindow
         var projectPath = $"{Application.dataPath}/nanoSDK/DEFAULTPATH";
         if (!Directory.Exists(projectPath))
             Directory.CreateDirectory(projectPath);
-        _configManager.UpdateConfig(config =>
-        {
-            config.DefaultPath.DefaultSet = projectPath;
-        });
+        _configManager.UpdateConfig(config => { config.DefaultPath.DefaultSet = projectPath; });
         EditorGUILayout.EndVertical();
     }
 
@@ -163,7 +172,9 @@ public class NanoDashboard : EditorWindow
 
         if (_configManager.Config.NanoVersion.CheckForUpdates)
             await Updater.CheckForUpdates();
-
         _configManager.UpdateConfig(config => { config.NanoVersion.Version = ConfigManager.GetCurrentVersion(); });
+        //if(!AutoSaveScene.IsPlayMode())
+          //  nanoSDKDiscordRpc.InitializeDiscordRpc(); Todo: Fix Discord RPC
+
     }
 }

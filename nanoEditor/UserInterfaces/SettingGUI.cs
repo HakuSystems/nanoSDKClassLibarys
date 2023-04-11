@@ -13,8 +13,8 @@ public class SettingGUI : EditorWindow
 
     public static bool DrawSettingsGUI()
     {
-        DiscordSettings();
-        GUILayout.Space(20);
+        //DiscordSettings(); todo
+        //GUILayout.Space(20);
         AutoSaverSettings();
         GUILayout.Space(20);
         DefaultPathSettings();
@@ -64,7 +64,8 @@ public class SettingGUI : EditorWindow
     private static void DiscordSettings()
     {
         EditorGUILayout.BeginHorizontal();
-        //todo discord
+        EditorGUILayout.LabelField("Discord", EditorStyles.toolbarTextField);
+        _configManager.Config.DiscordPresence.PresenceEnabled = EditorGUILayout.ToggleLeft("Enable Discord RPC", _configManager.Config.DiscordPresence.PresenceEnabled);
         EditorGUILayout.EndHorizontal();
     }
 

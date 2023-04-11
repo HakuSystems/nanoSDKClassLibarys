@@ -28,7 +28,7 @@ public class AutoSaveScene
         };
     }
 
-    private static bool IsPlayMode()
+    public static bool IsPlayMode()
     {
         return EditorApplication.isPlaying || EditorApplication.isPlayingOrWillChangePlaymode;
     }

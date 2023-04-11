@@ -9,30 +9,42 @@
 
     <ItemGroup>
       <Reference Include="Newtonsoft.Json">
-        <HintPath>..\..\nanoSDKDevelopment\Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
+        <HintPath>..\..\nanoSDKDevelopment\Assets\nanoSDK\Dependencies\Newtonsoft.Json.dll</HintPath>
       </Reference>
       <Reference Include="UnityEditor">
-        <HintPath>..\..\..\UNITY PROJECTS\gayboys\Main\Main\2019.4.31f1\Editor\Data\Managed\UnityEngine\UnityEditor.dll</HintPath>
+        <HintPath>..\..\..\..\..\..\UNITY PROJECTS\gayboys\Main\Main\2019.4.31f1\Editor\Data\Managed\UnityEngine\UnityEditor.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine">
-        <HintPath>..\..\..\UNITY PROJECTS\gayboys\Main\Main\2019.4.31f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
+        <HintPath>..\..\..\..\..\..\UNITY PROJECTS\gayboys\Main\Main\2019.4.31f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.AnimationModule">
-        <HintPath>..\..\..\UNITY PROJECTS\gayboys\Main\Main\2019.4.31f1\Editor\Data\Managed\UnityEngine\UnityEngine.AnimationModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\..\UNITY PROJECTS\gayboys\Main\Main\2019.4.31f1\Editor\Data\Managed\UnityEngine\UnityEngine.AnimationModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.AudioModule">
-        <HintPath>..\..\..\UNITY PROJECTS\gayboys\Main\Main\2019.4.31f1\Editor\Data\Managed\UnityEngine\UnityEngine.AudioModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\..\UNITY PROJECTS\gayboys\Main\Main\2019.4.31f1\Editor\Data\Managed\UnityEngine\UnityEngine.AudioModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.CoreModule">
-        <HintPath>..\..\..\UNITY PROJECTS\gayboys\Main\Main\2019.4.31f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\..\UNITY PROJECTS\gayboys\Main\Main\2019.4.31f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
       </Reference>
       <Reference Include="UnityEngine.IMGUIModule">
-        <HintPath>..\..\..\UNITY PROJECTS\gayboys\Main\Main\2019.4.31f1\Editor\Data\Managed\UnityEngine\UnityEngine.IMGUIModule.dll</HintPath>
+        <HintPath>..\..\..\..\..\..\UNITY PROJECTS\gayboys\Main\Main\2019.4.31f1\Editor\Data\Managed\UnityEngine\UnityEngine.IMGUIModule.dll</HintPath>
       </Reference>
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Styles" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="runtimes\win-x64\discord_game_sdk.dll">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="runtime\x86\discord_game_sdk.dll">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="runtime\x86_64\discord_game_sdk.dll">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
