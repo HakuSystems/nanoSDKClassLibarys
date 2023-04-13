@@ -109,6 +109,8 @@ public class ImportGUI
 
     private static void GetImportablePackages()
     {
+        EditorUtility.DisplayProgressBar("Please Wait", "Loading...",
+            0); // fake loading for bad internet or no internet
         try
         {
             using (var client = new WebClient())
@@ -117,12 +119,14 @@ public class ImportGUI
                 var config = JsonConvert.DeserializeObject<ImportData>(json);
                 _importableAssets = config.Assets.Values.Select(x => x.File).ToArray();
                 _doneMemoryAllocation = true;
+                EditorUtility.ClearProgressBar();
             }
         }
         catch (Exception ex)
         {
             NanoLog.LogWarning("nanoSDKImporter", $"Error fetching importable packages: {ex.Message}");
             EditorUtility.DisplayDialog("nanoSDK Importer", "Error fetching importable packages.", "Ok");
+            EditorUtility.ClearProgressBar();
         }
     }
 }
