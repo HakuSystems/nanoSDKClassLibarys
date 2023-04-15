@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Text;
 using nanoEditor.Configs;
+using nanoEditor.Discord;
 using nanoEditor.Logger;
 using nanoEditor.Models;
 using Newtonsoft.Json;
@@ -39,7 +40,6 @@ public static class ApiHelper
         NanoLog.Log("ApiHelper", "Clearing Login Data");
         user = null;
         _configManager.UpdateConfig(config => config.NanoAuth.AuthKey = null);
-        //DiscordRPC.naxokitRPC.UpdateRPC(); Todo
     }
 
     private static async Task<HttpResponseMessage> MakeApiCall(HttpRequestMessage request)

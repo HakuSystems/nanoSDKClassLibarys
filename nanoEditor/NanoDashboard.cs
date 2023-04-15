@@ -31,7 +31,7 @@ public class NanoDashboard : EditorWindow
 
     private void OnDisable()
     {
-        //DiscordRpc.Shutdown(); todo
+        DiscordRpc.Shutdown();
     }
 
     private void OnGUI()
@@ -173,8 +173,8 @@ public class NanoDashboard : EditorWindow
         if (_configManager.Config.NanoVersion.CheckForUpdates)
             await Updater.CheckForUpdates();
         _configManager.UpdateConfig(config => { config.NanoVersion.Version = ConfigManager.GetCurrentVersion(); });
-        //if(!AutoSaveScene.IsPlayMode())
-          //  nanoSDKDiscordRpc.InitializeDiscordRpc(); Todo: Fix Discord RPC
+        if(!AutoSaveScene.IsPlayMode())
+            nanoSDKDiscordRpc.InitializeDiscordRpc();
 
     }
 }

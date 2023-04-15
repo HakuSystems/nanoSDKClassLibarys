@@ -13,8 +13,8 @@ public class SettingGUI : EditorWindow
 
     public static bool DrawSettingsGUI()
     {
-        //DiscordSettings(); todo
-        //GUILayout.Space(20);
+        DiscordSettings(); 
+        GUILayout.Space(20);
         AutoSaverSettings();
         GUILayout.Space(20);
         DefaultPathSettings();
