@@ -9,7 +9,7 @@ namespace nanoEditor.Models;
 public class AutoSaveScene
 {
     private static readonly ConfigManager _configManager = new();
-    private static void SceneSaver()
+    public static void SceneSaver()
     {
         float lastSaveTime = 0;
 
