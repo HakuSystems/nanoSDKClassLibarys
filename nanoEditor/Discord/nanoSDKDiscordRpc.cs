@@ -16,7 +16,7 @@ public class nanoSDKDiscordRpc
     private static long _timestamp = (long)_time.TotalSeconds;
 
     private static readonly string GameName = Application.productName;
-    public static void InitializeDiscordRpc()
+    public static void InitializeDiscordRpc() // gets called outsite of the dll
     {
         if (!_configManager.Config.DiscordPresence.PresenceEnabled) return;
         var eventHandlers = default(DiscordRpc.EventHandlers);

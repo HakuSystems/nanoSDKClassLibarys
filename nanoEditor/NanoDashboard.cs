@@ -1,14 +1,12 @@
 ﻿using nanoEditor.Auth;
 using nanoEditor.Configs;
 using nanoEditor.Discord;
-using nanoEditor.Logger;
 using nanoEditor.Models;
 using nanoEditor.Styles;
 using nanoEditor.UserInterfaces;
 using nanoEditor.Version;
 using UnityEditor;
 using UnityEngine;
-using static UnityEditor.EditorApplication;
 
 namespace nanoEditor;
 
@@ -29,16 +27,11 @@ public class NanoDashboard : EditorWindow
         GetWindow(typeof(NanoDashboard), false, "nanoSDK Dashboard").Show();
     }
 
-    private void OnDisable()
-    {
-        DiscordRpc.Shutdown();
-    }
-
     private void OnGUI()
     {
-        if(ApiHelper.user == null) 
+        if (ApiHelper.user == null)
             ApiHelper.CheckUserSelf();
-        
+
         if (AutoSaveScene.IsPlayMode())
         {
             EditorGUILayout.LabelField("You can't use the Dashboard in Play Mode", EditorStyles.centeredGreyMiniLabel);
@@ -173,8 +166,5 @@ public class NanoDashboard : EditorWindow
         if (_configManager.Config.NanoVersion.CheckForUpdates)
             await Updater.CheckForUpdates();
         _configManager.UpdateConfig(config => { config.NanoVersion.Version = ConfigManager.GetCurrentVersion(); });
-        if(!AutoSaveScene.IsPlayMode())
-            nanoSDKDiscordRpc.InitializeDiscordRpc();
-
     }
 }
