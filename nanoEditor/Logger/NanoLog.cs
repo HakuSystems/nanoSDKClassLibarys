@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 namespace nanoEditor.Logger;
 
@@ -14,12 +15,6 @@ public class NanoLog
         string formattedMesasge = FormatLogMessage(className, message);
         Debug.LogWarning(formattedMesasge);
     }
-    public static void LogError(string className, string message)
-    {
-        string formattedMesasge = FormatLogMessage(className, message);
-        Debug.LogError(formattedMesasge);
-    }
-
     private static string FormatLogMessage(string className, string message)
     {
         string logPrefix = $"[{className}]";
@@ -32,5 +27,10 @@ public class NanoLog
         string horizontalLine = new string('-', text.Length +2);
         string wrappedText = $"{horizontalLine}\n|{text}|\n{horizontalLine}";
         return wrappedText;
+    }
+    public static void ExceptionHandler(string file_name, string message)
+    {
+        LogWarning(file_name, message);
+        EditorUtility.DisplayDialog(file_name, message, "Ok");
     }
 }

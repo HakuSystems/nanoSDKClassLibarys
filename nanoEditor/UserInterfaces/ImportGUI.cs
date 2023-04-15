@@ -31,7 +31,7 @@ public class ImportGUI
         }
 
         EditorGUILayout.BeginVertical();
-        EditorGUILayout.LabelField("When the window refreshed, then everything should be good.",
+        EditorGUILayout.LabelField("If the window has been refreshed, then everything should be good.",
             EditorStyles.centeredGreyMiniLabel);
         EditorGUILayout.LabelField("Importable Packages", EditorStyles.boldLabel);
         foreach (var asset in _importableAssets)
@@ -72,9 +72,8 @@ public class ImportGUI
         }
         catch (Exception ex)
         {
-            NanoLog.LogWarning("nanoSDKImporter", $"Error downloading {asset}: {ex.Message}");
+            NanoLog.ExceptionHandler("nanoSDKImporter", $"Error downloading {asset}: {ex.Message}");
             EditorUtility.ClearProgressBar();
-            EditorUtility.DisplayDialog("nanoSDK Importer", $"Error downloading {asset}.", "Ok");
             if (File.Exists(Path.Combine(ConfigManager.Config.DefaultPath.DefaultSet, "tmp", asset)))
                 File.Delete(Path.Combine(ConfigManager.Config.DefaultPath.DefaultSet, "tmp", asset));
         }
@@ -85,8 +84,7 @@ public class ImportGUI
         var assetName = ((WebClient)sender).QueryString["asset"];
         if (e.Error != null)
         {
-            NanoLog.LogWarning("nanoSDKImporter", $"Failed to download {assetName}: {e.Error.Message}");
-            EditorUtility.DisplayDialog("nanoSDK Importer", $"Failed to download {assetName}.", "Ok");
+            NanoLog.ExceptionHandler("nanoSDKImporter", $"Failed to download {assetName}: {e.Error.Message}");
             return;
         }
 
@@ -124,8 +122,7 @@ public class ImportGUI
         }
         catch (Exception ex)
         {
-            NanoLog.LogWarning("nanoSDKImporter", $"Error fetching importable packages: {ex.Message}");
-            EditorUtility.DisplayDialog("nanoSDK Importer", "Error fetching importable packages.", "Ok");
+            NanoLog.ExceptionHandler("nanoSDKImporter", $"Error fetching importable packages: {ex.Message}");
             EditorUtility.ClearProgressBar();
         }
     }
