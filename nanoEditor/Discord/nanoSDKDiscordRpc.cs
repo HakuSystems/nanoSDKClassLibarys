@@ -48,6 +48,10 @@ public class nanoSDKDiscordRpc
         presence.button2Url = "https://nanosdk.net/discord";
         DiscordRpc.UpdatePresence(presence);
     }
+    public static void Dispose()
+    {
+        DiscordRpc.Shutdown();
+    }
 
     public static void UpdateHierarchyElement(string elementName)
     {

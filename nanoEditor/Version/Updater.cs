@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Net;
 using nanoEditor.Configs;
+using nanoEditor.Discord;
 using nanoEditor.Logger;
 using nanoEditor.Models;
 using nanoEditor.UserInterfaces.Tools;
@@ -47,6 +48,7 @@ public class Updater : MonoBehaviour
                 $"Version V{LatestVersion.Version} is available. Do you want to update?", "Yes", "No");
             if (update)
             {
+                nanoSDKDiscordRpc.Dispose(); //Dispose Discord RPC to prevent conflicts with the old discord RPC Dll
                 BackupManager.CreateBackup(_configManager.Config.BackupManager.SaveAsUnitypackage,
                     _configManager.Config.BackupManager.SaveAsUnitypackage);
                 await DownloadVersion();
