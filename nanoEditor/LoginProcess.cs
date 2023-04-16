@@ -15,7 +15,7 @@ public class LoginProcess : EditorWindow
     private string _emailInput;
 
 
-    [MenuItem("nanoSDK/Dashboard")]
+    [MenuItem("nanoSDK/Dashboard", false,500)]
     public static void ShowWindow()
     {
         GetWindow(typeof(LoginProcess), false, "nanoSDK Account");

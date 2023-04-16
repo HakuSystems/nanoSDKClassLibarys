@@ -6,7 +6,7 @@ namespace nanoEditor.MenuItems;
 
 public class MissingScriptsDeletion : EditorWindow
 {
-    [MenuItem("nanoSDK/Tools/Delete Missing Scripts")]
+    [MenuItem("nanoSDK/Delete Missing Scripts")]
     public static void DeleteMissingScripts()
     {
         var allGameObjects = FindObjectsOfType<GameObject>();
