@@ -1,4 +1,5 @@
 ﻿using nanoEditor.Configs;
+using nanoEditor.MenuItems;
 using nanoEditor.Models;
 using nanoEditor.Version;
 using UnityEditor;
@@ -13,6 +14,12 @@ public class SettingGUI : EditorWindow
 
     public static bool DrawSettingsGUI()
     {
+        EditorGUILayout.BeginVertical();
+        if (GUILayout.Button("Report a Bug"))
+        {
+            QuickReport.BugReport("Settings");
+        }
+        EditorGUILayout.EndVertical();  
         DiscordSettings(); 
         GUILayout.Space(20);
         AutoSaverSettings();

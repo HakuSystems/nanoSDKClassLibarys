@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using nanoEditor.MenuItems;
 using nanoEditor.Models;
 using UnityEditor;
 using UnityEngine;
@@ -33,6 +34,10 @@ public class EasySearch : EditorWindow
     {
         GUILayout.BeginHorizontal(GUI.skin.FindStyle("Toolbar"));
             GUILayout.Button("nanosdk", EditorStyles.toolbarButton);
+            if (GUILayout.Button("Report a Bug"))
+            {
+                QuickReport.BugReport("EasySearch");
+            }
             GUILayout.Button("EasySearch", EditorStyles.toolbarButton);
             _searchString = GUILayout.TextField(_searchString, GUI.skin.FindStyle("ToolbarSeachTextField"),
                 GUILayout.Width(450));

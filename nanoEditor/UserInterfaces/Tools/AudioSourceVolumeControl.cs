@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 using System.IO;
+using nanoEditor.MenuItems;
 
 namespace nanoEditor.UserInterfaces.Tools;
 
@@ -51,6 +52,10 @@ public class AudioSourceVolumeControl : EditorWindow
     {
         EditorGUILayout.BeginVertical();
         {
+            if (GUILayout.Button("Report a Bug"))
+            {
+                QuickReport.BugReport("AudioSourceVolumeControl");
+            }
             EditorGUILayout.BeginHorizontal();
             {
                 var audioSourcesCountLabel = AudioSources.Count == 0

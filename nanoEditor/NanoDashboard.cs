@@ -1,6 +1,7 @@
 ﻿using nanoEditor.Auth;
 using nanoEditor.Configs;
 using nanoEditor.Discord;
+using nanoEditor.MenuItems;
 using nanoEditor.Models;
 using nanoEditor.Styles;
 using nanoEditor.UserInterfaces;
@@ -73,7 +74,8 @@ public class NanoDashboard : EditorWindow
         _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition);
 
         EditorGUILayout.LabelField("Welcome to the nanoSDK Dashboard!", EditorStyles.centeredGreyMiniLabel);
-
+        
+        
         _toolsOpen = FoldoutTexture.MakeTextFoldout("Tools", _toolsOpen);
         if (_toolsOpen)
             ToolsGUI.DrawToolsGUI();
@@ -84,8 +86,8 @@ public class NanoDashboard : EditorWindow
         _importFoldout = FoldoutTexture.MakeTextFoldout("Importables", _importFoldout);
         if (_importFoldout)
             ImportGUI.DrawImportGUI();
-        _plusFoldout = FoldoutTexture.MakeTextFoldout("nanoSDK Plus", _plusFoldout);
-        if (_plusFoldout && _configManager.Config.PremiumCheck.IsPremiumSinceLastCheck) PlusGUI.DrawPlusGUI();
+        //_plusFoldout = FoldoutTexture.MakeTextFoldout("nanoSDK Plus", _plusFoldout); todo: Plus
+        //if (_plusFoldout && _configManager.Config.PremiumCheck.IsPremiumSinceLastCheck) PlusGUI.DrawPlusGUI();
 
 
         EditorGUILayout.EndVertical();

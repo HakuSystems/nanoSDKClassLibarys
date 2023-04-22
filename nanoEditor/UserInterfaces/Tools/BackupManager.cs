@@ -8,7 +8,8 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using System.IO; // CHANGED: Added for DirectoryInfo and File classes
 using System.Collections.Generic; // CHANGED: Added for List class
-using System; // CHANGED: Added for DateTime class
+using System;
+using nanoEditor.MenuItems; // CHANGED: Added for DateTime class
 
 namespace nanoEditor.UserInterfaces.Tools
 {
@@ -48,6 +49,12 @@ namespace nanoEditor.UserInterfaces.Tools
 
         private void OnGUI()
         {
+            EditorGUILayout.BeginVertical();
+            if (GUILayout.Button("Report a Bug"))
+            {
+                QuickReport.BugReport("BackupManager");
+            }
+            EditorGUILayout.EndVertical();  
             GUILayout.Button("Backup Your UnityProject", EditorStyles.toolbarButton);
 
             EditorGUILayout.LabelField("Backup", EditorStyles.boldLabel);

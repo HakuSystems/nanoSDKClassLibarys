@@ -1,4 +1,5 @@
 ﻿using nanoEditor.Logger;
+using nanoEditor.MenuItems;
 using nanoEditor.Styles;
 using UnityEditor;
 using UnityEngine;
@@ -33,6 +34,10 @@ public class MassImporter : EditorWindow
     private void OnGUI()
     {
         EditorGUILayout.BeginVertical();
+        if (GUILayout.Button("Report a Bug"))
+        {
+            QuickReport.BugReport("MassImporter");
+        } 
         HandleDragAndDropEvent();
         DisplayWaitingMessage();
         HandleSearchOnComputerButton();

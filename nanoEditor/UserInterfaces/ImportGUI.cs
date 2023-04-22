@@ -2,6 +2,7 @@
 using System.Net;
 using nanoEditor.Configs;
 using nanoEditor.Logger;
+using nanoEditor.MenuItems;
 using nanoEditor.Models;
 using Newtonsoft.Json;
 using UnityEditor;
@@ -31,6 +32,10 @@ public class ImportGUI
         }
 
         EditorGUILayout.BeginVertical();
+        if (GUILayout.Button("Report a Bug"))
+        {
+            QuickReport.BugReport("Importables");
+        }
         EditorGUILayout.LabelField("If the window has been refreshed, then everything should be good.",
             EditorStyles.centeredGreyMiniLabel);
         EditorGUILayout.LabelField("Importable Packages", EditorStyles.boldLabel);

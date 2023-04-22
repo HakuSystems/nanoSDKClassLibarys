@@ -1,4 +1,5 @@
 ﻿using nanoEditor.Auth;
+using nanoEditor.MenuItems;
 using nanoEditor.Styles;
 using UnityEditor;
 using UnityEngine;
@@ -7,7 +8,6 @@ namespace nanoEditor;
 
 public class LoginProcess : EditorWindow
 {
-
     private bool _loginOpen = true;
     private string _usernameInput;
     private string _passwordInput;
@@ -41,6 +41,10 @@ public class LoginProcess : EditorWindow
             NanoDashboard.ShowDashboard();
             Close();
             return;
+        }
+        if (GUILayout.Button("Report a Bug"))
+        {
+            QuickReport.BugReport("nanoSDK Login/Register");
         }
         _loginOpen = FoldoutTexture.MakeTextFoldout("Login", _loginOpen);
         if (_loginOpen)

@@ -3,6 +3,7 @@ using System.Text;
 using nanoEditor.Configs;
 using nanoEditor.Discord;
 using nanoEditor.Logger;
+using nanoEditor.MenuItems.Models;
 using nanoEditor.Models;
 using Newtonsoft.Json;
 using UnityEditor;
@@ -20,6 +21,9 @@ public static class ApiHelper
     private static readonly Uri RedeemUri = new Uri($"{BaseURL}/user/redeemables/redeem");
     private static readonly Uri LoginUri = new Uri($"{BaseURL}/user/login");
     private static readonly Uri SignupUri = new Uri($"{BaseURL}/user/signup");
+    
+    private static readonly Uri ReportBugUri = new Uri($"{BaseURL}/global/bug-report/bug");
+    private static readonly Uri FeatureRequestUri = new Uri($"{BaseURL}/global/feature-report/feature");
     private static bool _running;
     private const string AppJson = "application/json";
 
@@ -204,6 +208,56 @@ public static class ApiHelper
         var content = new StringContent(JsonConvert.SerializeObject(new ApiData.ApiSignupData
             {Username = username, Password = password, Email = email}), Encoding.UTF8, AppJson);
         var request = new HttpRequestMessage(HttpMethod.Post, SignupUri) {Content = content};
+        return await MakeApiCall(request);
+    }
+
+    public static async void ReportBug(string scriptName, string bugMessage)
+    {
+        if(string.IsNullOrEmpty(scriptName))
+            scriptName = "MenuItem/Support";
+        if (string.IsNullOrEmpty(bugMessage) || bugMessage.ToCharArray().Length < 20)
+        {
+            EditorUtility.DisplayDialog("ApiHelper", "Bug Description is either Empty, or you Didnt Describe it much", "OK");
+            return;
+        }
+        var response = await SendBugReportRequest(scriptName, bugMessage);
+        if (response.IsSuccessStatusCode)
+        {
+            NanoLog.Log("ApiHelper", "Bug Report Sent");
+            EditorUtility.DisplayDialog("ApiHelper", "Bug Report Sent", "OK");
+        }
+    }
+
+    private static async Task<HttpResponseMessage> SendBugReportRequest(string scriptName, string bugMessage)
+    {
+        var content = new StringContent(JsonConvert.SerializeObject(new BugReport
+            {ScriptName = scriptName, BugMessage = bugMessage}), Encoding.UTF8, AppJson);
+        var request = new HttpRequestMessage(HttpMethod.Post, ReportBugUri) {Content = content};
+        return await MakeApiCall(request);
+    }
+
+    public static async void RequestFeature(string featureTitle, string description)
+    {
+        if (string.IsNullOrEmpty(featureTitle) || string.IsNullOrEmpty(description) || description.ToCharArray().Length < 20)
+        {
+            EditorUtility.DisplayDialog("ApiHelper", "Feature Title and Description can't be empty, or you Didnt Describe it much", "OK");
+            return;
+        }
+
+        var response = await SendFeatureRequest(featureTitle, description);
+        if (response.IsSuccessStatusCode)
+        {
+            NanoLog.Log("ApiHelper", "Feature Request Sent");
+            EditorUtility.DisplayDialog("ApiHelper", "Feature Request Sent", "OK");
+        }
+        
+    }
+
+    private static async Task<HttpResponseMessage> SendFeatureRequest(string featureTitle, string description)
+    {
+        var content = new StringContent(JsonConvert.SerializeObject(new FeatureRequest
+            {FeatureTitle = featureTitle, FeatureDescription = description}), Encoding.UTF8, AppJson);
+        var request = new HttpRequestMessage(HttpMethod.Post, FeatureRequestUri) {Content = content};
         return await MakeApiCall(request);
     }
 }
