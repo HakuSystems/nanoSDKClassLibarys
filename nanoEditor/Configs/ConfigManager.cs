@@ -30,7 +30,10 @@ public class ConfigManager
     }
     public static string GetCurrentVersion()
     {
-        string version = File.ReadAllText("Assets/nanoSDK/Version.txt");
+        //Packages\com.lyze.nanosdk\Version.txt
+        var versionPath = Path.Combine("Packages/com.lyze.nanosdk/Version.txt");
+        if (!File.Exists(versionPath)) return null;
+        var version = File.ReadAllText(versionPath);
         return version;
     }
 
